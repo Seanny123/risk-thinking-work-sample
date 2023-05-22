@@ -1,9 +1,5 @@
 """
-In the instructions, the purpose of the model is not stated.
 
-I'm assuming the most practical use case given the starter code is to
-predict the Volume of the next day, given the features of the current
-day for a specific stock.
 """
 from pathlib import Path
 
@@ -17,12 +13,11 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 
 @task
-def train_model(features_file: Path, model_file: Path):
-    print("training model")
-    data = pd.read_parquet(features_file, columns=["Date", "Symbol", "Volume", "vol_moving_avg", "adj_close_rolling_med"])
+def train_model(features_folder: Path, model_file: Path, stock_name: str):
+    feat_file = features_folder / f"{stock_name}.parquet"
+    print("training model on", feat_file)
+    data = pd.read_parquet(feat_file, columns=["Date", "Symbol", "Volume", "vol_moving_avg", "adj_close_rolling_med"])
 
-    # choose an arbitrary stock to evaluate on
-    data = data[data["Symbol"] == "AACG"]
     data = data.assign(**{"Date": pd.to_datetime(data["Date"])}).set_index("Date").sort_index()
 
     # Select features and target
@@ -61,15 +56,10 @@ def train_model(features_file: Path, model_file: Path):
     naive_mse = mean_squared_error(y_test, naive_y_pred)
 
     # wow, this model is terrible!
+    print("model mae:", mae)
     print("mae improvement over naive: (should be positive)", naive_mae - mae)
-    print("mse improvement over naive: (should be positive)", naive_mse - mse)
-
-    # There are many options for improving these models:
-    # - I could improve the input features by using features lags, which would let me use models better-suited for time-series forecasting, but that would mess up the API in the next step
-    # - I could use k-fold cross-validation to better estimate model performance
-    # - I could fine-tune the models further using hyper-parameter tuning, but given how poorly it is performing, this feels futile
-    # Either way, given this work sample is for a data engineering
-    # position, I'm not going to spend any more time on this
+    print("model mse:", mse)
+    print("mse improvement over naive: (should be positive)", abs(naive_mse) - abs(mse))
 
     onnx_model = skl2onnx.to_onnx(model, X=X_train.values.astype("float32"))
 
