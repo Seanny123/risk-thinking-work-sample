@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "risky"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "~3.10"
+kaggle = "^1.5.13"
+ibis-framework = { version = "^5.1.0", extras = ["duckdb"] }
+pandas = "^2.0.1"
+scikit-learn = "^1.2.2"
+skl2onnx = "^1.14.1"
+onnxruntime = "^1.14.1"
+fastapi = { version = "^0.95.2", extras = ["all"] }
+ray = "^2.4.0"
+prefect-ray = "^0.2.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
