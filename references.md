@@ -29,11 +29,12 @@ resources consulted to complete this task.
   al.
 - Reminding myself of [the difference between MAE and
   MSE](https://stats.stackexchange.com/q/48267/29949).
-- Trying to [find a Regression model that can train on billions of
-  data
-  points](https://vaex.io/blog/ml-impossible-train-a-1-billion-sample-model-in-20-minutes-with-vaex-and-scikit-learn-on-your).
-  Of course its a linear model, which I didn't up using, since it
-  performed worse than the RandomForestRegressor.
+- Trying to [find a regression/forecasting model that can train on
+  billions of data
+  points](https://vaex.io/blog/ml-impossible-train-a-1-billion-sample-model-in-20-minutes-with-vaex-and-scikit-learn-on-your)
+  while only using a CPU. Of course its a linear model, which I
+  didn't up using, since it performed worse than the
+  RandomForestRegressor.
 - [Make scikit-learn multi-process](https://machinelearningmastery.com/multi-core-machine-learning-in-python/).
 
 ## Miscellaneous debugging
