@@ -27,6 +27,7 @@ docker run -v $(pwd)/data:/app/data --shm-size=4.86GB --rm -it local/volume-pipe
   a future applications, for example querying a specific day across
   all stocks/etfs, it is trivial to amalgamate the data using
   `pyarrow.parquet.ParquetDataset`
+- Basic integration tests are stored in `tests/`
 
 
 ## Notes on ML Training
@@ -59,7 +60,10 @@ data science role, I did not investigate any of these options.
 
 ## Notes on Model Serving
 
-The model is served using ONNX on Fly.io using FastAPI. Given the terrible performance of the ML model, it felt futile to optimize for serving performance and to profile the current serving configuration.
+The model is served using ONNX on Fly.io using FastAPI. The
+Dockerfile and code is stored in `predictor/`.
+
+Given the terrible performance of the ML model, it felt futile to optimize for serving performance and to profile the current serving configuration.
 
 Given a better performing model, I would try to [optimize the FastAPI
 endpoint using Ray
