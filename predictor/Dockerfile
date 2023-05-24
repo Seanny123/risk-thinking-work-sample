@@ -3,7 +3,8 @@ FROM python:3.10-slim-bullseye
 ENV PYTHONUNBUFFERED True
 ENV APP_HOME /app
 WORKDIR $APP_HOME
-COPY . ./
+COPY predict.py ./
+COPY rf_volume.onnx ./
 
 RUN pip install --no-cache-dir onnxruntime fastapi uvicorn
 
