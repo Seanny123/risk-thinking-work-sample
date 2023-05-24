@@ -17,7 +17,7 @@ parquet_folder = data_dir / "market_data"
 parquet_folder.mkdir(exist_ok=True)
 feat_folder = data_dir / "market_data_with_features"
 feat_folder.mkdir(exist_ok=True)
-model_file = root_dir / "predictor" / "rf_volume.onnx"
+model_file = data_dir / "rf_volume.onnx"
 
 
 @flow
