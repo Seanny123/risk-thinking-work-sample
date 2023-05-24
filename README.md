@@ -36,15 +36,15 @@ docker run -v $(pwd)/data:/app/data --shm-size=4.86GB --rm -it local/volume-pipe
 In the instructions, the purpose of the model is not stated.
 
 This works sample assumes the most practical use case given the
-starter code is to predict the Volume of the next day, which I've
-named `next_day_volume`, given the `vol_moving_avg` and
+starter code is to predict the Volume of the next day, named
+`next_day_volume`, given the `vol_moving_avg` and
 `adj_close_rolling_med` features of the current day for a specific
 stock/etf.
 
-The previous steps generate a massive (2.8 x 10^7) amount of data. My
-old laptop could not train a model to leverage that quantity of data,
-with the exception of terribly performing linear models, so I
-randomly sample a manageable subset of the data (1 x 10^4) for
+The previous pipeline steps generate a massive (2.8 x 10^7) amount of
+data. My old laptop could not train a model to leverage that quantity
+of data, with the exception of terribly performing linear models, so
+a manageable subset of the data (1 x 10^4) is randomly sample for
 training.
 
 The performance of the `RandomForestModel` is quite terrible.
@@ -56,16 +56,16 @@ There are many options for improving this models:
   or GPU acceleration.
 - Instead of randomly sampling data points to train the model, a
   representative sub-sample could be found.
-- I could improve the input features by using features lags, which
+- Improve the input features by using features lags, which
   would let me use models better-suited for time-series forecasting,
   but would be incompatible with the API for the Model Serving step.
-- I could use k-fold cross-validation to better estimate model
+- Use k-fold cross-validation to better estimate model
   performance.
-- I could fine-tune the models further using hyper-parameter tuning,
+- Fine-tune the models further using hyper-parameter tuning,
   but given how poorly it is performing, this feels futile.
 
 Given this work sample is for a data engineering position, and not a
-data science role, I did not investigate any of these options.
+data science role, these options were not investigated.
 
 ## Notes on Model Serving
 
@@ -77,8 +77,8 @@ optimize for serving performance and to profile the current serving
 configuration, since a better performing model would likely be a
 completely different size and inference performance.
 
-Given a better performing model, I would try to [optimize the FastAPI
-endpoint using Ray
+Given a better performing model, the FastAPI endpoint could be
+[optimized using Ray
 Serve](https://www.anyscale.com/blog/ray-serve-fastapi-the-best-of-both-worlds),
 which provides several features, such as:
 
