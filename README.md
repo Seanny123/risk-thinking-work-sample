@@ -43,13 +43,13 @@ stock/etf.
 
 The previous pipeline steps generate a massive (2.8 x 10^7) amount of
 data. My old laptop could not train a model to leverage that quantity
-of data, with the exception of terribly performing linear models, so
-a manageable subset of the data (1 x 10^4) is randomly sample for
-training.
+of data, with the exception of poorly performing linear models.
+Instead, a manageable subset of the data (1 x 10^4) is randomly
+sampled for training.
 
-The performance of the `RandomForestModel` is quite terrible.
+The performance of the `RandomForestModel` is terrible.
 
-There are many options for improving this models:
+There are many options for improving this model:
 - Given access to better hardware, such as a CPU cluster or a GPU, a
   model which scales better to a large amount of data could be used.
   For example, `xgboost` support both CPU cluster (via Spark or Ray)
