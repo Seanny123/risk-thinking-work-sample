@@ -9,6 +9,7 @@ pipeline was unfeasible given it would require:
 The pipeline can be run inside Docker from the repository root using:
 ```bash
 docker build -t local/volume-pipeline .
+# note: --shm-size is to improve Ray performance
 docker run -v $(pwd)/data:/app/data --shm-size=4.86GB --rm -it local/volume-pipeline
 ```
 
